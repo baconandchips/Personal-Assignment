@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import AddMessage from './components/addMessage'
+import MessageList from './components/messageList'
+import VisibilityFilter from './components/visibilityFilter'
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
-function App() {
+function App() { // this is how you make a functional component
   return (
+    <Provider store={store}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Message Manager</h1>
+      <AddMessage />
+      <MessageList />
+      <VisibilityFilter />
     </div>
+    </Provider>
+    
   );
 }
 
