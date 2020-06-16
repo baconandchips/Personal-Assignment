@@ -23,6 +23,7 @@ export const messages = (state = initialMessageState, action) => {
                         ...state.data,
                         [state.nextId]: {
                             showHidden: false,
+                            // Array of info stored inside content
                             content: action.payload.content.value,
                             contentHidden: action.payload.content.valueHidden
                         },
