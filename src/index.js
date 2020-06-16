@@ -3,14 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import combineReducers from './reducers/index.js'; // we exported combineReducers
 
 ReactDOM.render(
-  <Provider store={createStore(combineReducers)}>
-    <App />
-  </Provider>,
+    <App />,
   document.getElementById('root')
 );
 
