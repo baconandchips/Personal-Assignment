@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { addMessage } from '../redux/actions'
 
 function AddMessage({ addMessage }) {
-    const [value, setValue] = useState('');
 
-    const handleOnChange = (e) => {
-        setValue(e.target.value)
-    }
     const handleAdd = () => {
-        setValue('')
-        addMessage(value)
+        let value = document.getElementById("regularText").value
+        let valueHidden = document.getElementById("hiddenText").value
+        console.log(value)
+        console.log("valueHidden: ", valueHidden)
+        addMessage({value, valueHidden})
     }
     
     return (
         <>
-            <input type="text" onChange={handleOnChange} value={value} placeholder="type here" />
+            <input type="text" id="regularText" placeholder="type here" />
+            <input type="text" id="hiddenText" placeholder="hidden text" />
             <button onClick={handleAdd}>Add</button>
         </>
     )

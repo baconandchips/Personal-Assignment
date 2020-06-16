@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, TOGGLE_MESSAGE, DELETE_MESSAGE, SET_FILTER } from './actionTypes'
+import { ADD_MESSAGE, TOGGLE_MESSAGE, SET_FILTER } from './actionTypes'
 
 export const addMessage = (content) => (
     {
@@ -18,9 +18,9 @@ export const toggleMessage = (id) => (
     }
 )
 
-export const deleteMessage = (id) => (
+export const setFilter = (filter) => (
     {
-        type: SET-FILTER,
+        type: SET_FILTER,
         payload: {
             filter
         }

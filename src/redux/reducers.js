@@ -1,13 +1,14 @@
 import { FILTER_ALL } from './actionTypes'
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER } from './actionTypes'
+import { ADD_MESSAGE, TOGGLE_MESSAGE, SET_FILTER } from './actionTypes'
 
-const initialTodoState = {
+const initialMessageState = {
     nextId: 2,
     data:
     {
         1: {
             content: 'This is a message',
-            completed: false
+            contentHidden: 'Shrek',
+            showHidden: false
         }
     }
 }
@@ -21,8 +22,9 @@ export const messages = (state = initialMessageState, action) => {
                     data: {
                         ...state.data,
                         [state.nextId]: {
-                            completed: false,
-                            content: action.payload.content
+                            showHidden: false,
+                            content: action.payload.content.value,
+                            contentHidden: action.payload.content.valueHidden
                         },
                     },
 
@@ -32,6 +34,7 @@ export const messages = (state = initialMessageState, action) => {
         }
         case TOGGLE_MESSAGE: {
             console.log(action.payload)
+            console.log(state.data[action.payload.id].showHidden)
             return (
                 {
                     ...state,
@@ -39,7 +42,7 @@ export const messages = (state = initialMessageState, action) => {
                         ...state.data,
                         [action.payload.id]: {
                             ...state.data[action.payload.id],
-                            completed: !(state.data[action.payload.id].completed)
+                            showHidden: !(state.data[action.payload.id].showHidden)
                         }
                     }
                 }

@@ -5,7 +5,7 @@ import { Filters } from '../redux/actionTypes'
 
 function VisibilityFilter({ activeFilter, setFilter }) {
     return (
-        Filters.map((filter, i) => (<button className={filter === actoveFilter ? 'active' : ''} onClick={() => setFilter(filter)} key={`filter-${i}`}>{filter}</button>)
+        Filters.map((filter, i) => (<button className={filter === activeFilter ? 'active' : ''} onClick={() => setFilter(filter)} key={`filter-${i}`}>{filter}</button>)
     ))
 }
 
