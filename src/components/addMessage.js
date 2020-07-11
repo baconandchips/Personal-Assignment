@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { addMessage } from '../redux/actions'
+import { addMessage, getMessages } from '../redux/actions'
 
-function AddMessage({ addMessage }) {
+function AddMessage({ messages, addMessage }) {
+
+    useEffect(() => {
+        getMessages();
+    }, []);
 
     const handleAdd = () => {
         let value = document.getElementById("regularText").value
         let valueHidden = document.getElementById("hiddenText").value
         console.log(value)
         console.log("valueHidden: ", valueHidden)
-        addMessage({value, valueHidden})
+        // addMessage({value, valueHidden})
+        console.log("messages: " + messages);
+        let number = 6; // messages.length; // TODO: FIX, THIS SHOULD NOT BE HERE
+        // add in axios double nested call, 1 for PUT and 1 for GET
+        addMessage({
+            content: value,
+            contentHidden: valueHidden,
+            number,
+        });
+        number++;
+        // .then(addMessage({value, valueHidden}));
     }
     
     return (
@@ -21,5 +35,12 @@ function AddMessage({ addMessage }) {
     )
 }
 
+const mapState = (state) => {
+    // Give data
+    console.log("state: ");
+    console.log(state);
+    return { messages: state.messages.data }
+}
+
 // Connect action to the thing we're exporting right now
-export default connect(null, { addMessage })(AddMessage)
+export default connect(mapState, { addMessage })(AddMessage)

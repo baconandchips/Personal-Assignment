@@ -1,10 +1,16 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+
+import rootReducer from './redux/store';
 import AddMessage from './components/addMessage'
 import MessageList from './components/messageList'
 import VisibilityFilter from './components/visibilityFilter'
-import { Provider } from 'react-redux'
-import store from './redux/store'
 import './App.css'
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function App() { // this is how you make a functional component
   return (
