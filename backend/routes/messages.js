@@ -24,6 +24,7 @@ router.route('/add').put((req, res) => { // MAKE SURE PATHS ARE SPELT RIGHT
         contentHidden,
         showHidden,
     });
+    console.log("newMessage: ", newMessage);
 
     newMessage.save()
         .then(() => res.json('Message added!'))

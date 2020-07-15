@@ -13,6 +13,7 @@ export const getMessages = () => {
         axios.get('http://localhost:5000/messages/')
     .then(response => {
         console.log("Got data from backend");
+        console.log("response: ", response.data);
         dispatch(getMessagesSuccess(response.data));
     })
     .catch((error) => {

@@ -3,17 +3,19 @@ import { ADD_MESSAGE, TOGGLE_MESSAGE, SET_FILTER } from './actionTypes'
 import axios from 'axios';
 
 // Not useful rn
-const getInitialData = axios.get('http://localhost:5000/messages/')
-    .then(response => {
-        // console.log("Got data from backend");
-        initialMessageState.data = response.data;
-        initialMessageState.nextId = response.data.length + 1;
-    })
-    .catch((error) => {
-        console.log(error);
-    })
+// const getInitialData = axios.get('http://localhost:5000/messages/')
+//     .then(response => {
+//         // console.log("Got data from backend");
+//         console.log(response);
+//         initialMessageState.data = response.data;
+//         initialMessageState.nextId = response.data.length + 1;
+//         initialMessageState = getInitialData;
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     })
 
-const initialMessageState = getInitialData;
+let initialMessageState = [];
 
 // Useful
 // export const getMessages = (state, action) => {
@@ -44,10 +46,10 @@ const initialMessageState = getInitialData;
     ]
 }*/
 
-export const messages = (state = getInitialData, action) => {
+export const messages = (state = [], action) => {
     switch(action.type) {
         case 'GET_MESSAGES':
-            return action.messages;
+            return action.payload.messages;
         case ADD_MESSAGE: {
             console.log("Add message reducer state: ", state);
             console.log("Add message reducer action: ", action);

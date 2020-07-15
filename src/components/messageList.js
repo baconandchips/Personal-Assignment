@@ -22,10 +22,13 @@ const Message = ({ message, id, toggleMessage }) => (
     </li>
 )
 
-function MessageList({ messages, toggleMessage }) {
+function MessageList({ messages, toggleMessage, getMessages }) {
+    
     useEffect(() => {
         getMessages();
     }, []);
+    // mapstatetoprops mapdispatchtoprops
+    // line 25 is just props
     
     return (
         _.keys(messages).map((id) => (
@@ -34,18 +37,23 @@ function MessageList({ messages, toggleMessage }) {
     )
 }
 
+function grabDataFromBackend(props) {
+    props.getMessages();
+}
+
 const mapState = (state) => {
     if(state.visibilityFilter.activeFilter === FILTER_ALL) {
-        return { messages: state.messages.data }
+        return { messages: state.messages }
     } else if(state.visibilityFilter.activeFilter === FILTER_SHOWHIDDEN) {
         return ({
-            messages: _.pick(state.messages.data, (message) => message.showHidden)
+            messages: _.pick(state.messages, (message) => message.showHidden)
         })
     } else {
         return ({
-            messages: _.pick(state.messages.data, (message) => !message.showHidden)
+            messages: _.pick(state.messages, (message) => !message.showHidden)
         })
     }
 }
 
 export default connect(mapState, { toggleMessage, getMessages })(MessageList)
+// 
