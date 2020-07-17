@@ -40,7 +40,7 @@ export const addMessage = (message) => {
             "showHidden": Boolean(false)
         })
         .then((res) => {
-            addMessageSuccess(res.data);
+            dispatch(addMessageSuccess(message));
         })
         .catch((error) => {
             console.log(error);

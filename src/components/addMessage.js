@@ -13,17 +13,13 @@ function AddMessage({ messages, addMessage }) {
         let valueHidden = document.getElementById("hiddenText").value
         console.log(value)
         console.log("valueHidden: ", valueHidden)
-        // addMessage({value, valueHidden})
-        console.log("messages: " + messages);
-        let number = 6; // messages.length; // TODO: FIX, THIS SHOULD NOT BE HERE
-        // add in axios double nested call, 1 for PUT and 1 for GET
+        console.log("messages: ", messages);
+        let number = messages.length+1;
         addMessage({
             content: value,
             contentHidden: valueHidden,
-            number,
+            number: number,
         });
-        number++;
-        // .then(addMessage({value, valueHidden}));
     }
     
     return (
@@ -39,7 +35,7 @@ const mapState = (state) => {
     // Give data
     console.log("state: ");
     console.log(state);
-    return { messages: state.messages.data }
+    return { messages: state.messages }
 }
 
 // Connect action to the thing we're exporting right now
