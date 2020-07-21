@@ -48,7 +48,7 @@ export const addMessage = (message) => {
     }
 }
 
-export const toggleMessage = (id) => (
+export const toggleMessageSuccess = (id) => (
     {
         type: TOGGLE_MESSAGE,
         payload: {
@@ -56,6 +56,27 @@ export const toggleMessage = (id) => (
         }
     }
 )
+
+export const toggleMessage = (message) => {
+    return (dispatch) => {
+        console.log("message inside toggle: ", message);
+        console.log("message._id: ", message._id);
+        axios.post(`http://localhost:5000/messages/update/${message._id}`, {
+            "_id": Object(message._id),
+            "messageID": Number(message.messageID),
+            "content": String(message.content),
+            "contentHidden": String(message.contentHidden),
+            "showHidden": Boolean(!message.showHidden)
+        })
+        .then((res) => {
+            console.log("toggle action is then'd");
+            dispatch(toggleMessageSuccess(message.messageID));
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+}
 
 export const setFilter = (filter) => (
     {

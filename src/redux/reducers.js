@@ -23,25 +23,21 @@ export const messages = (state = [], action) => {
             )
         }
         case TOGGLE_MESSAGE: {
-            console.log("Toggle message reducer state: ", state);
-            console.log("Toggle message reducer action: ", action);
-            // console.log(state.data[action.payload.id].showHidden);
-            let changeState = state.data;
-            for (let i = 0; i < changeState.length; ++i) {
-                // console.log(changeState[i]);
+            // console.log("Toggle message reducer state: ", state);
+            // console.log("Toggle message reducer action: ", action);
+            for (let i = 0; i < state.length; ++i) {
                 // console.log("needed ID: " +  parseInt(action.payload.id));
-                // console.log("messageID: " +  changeState[i].messageID);
-                if (changeState[i].messageID - 1 === (parseInt(action.payload.id))) {
-                    // console.log("I'm in");
-                    changeState[i].showHidden = !changeState[i].showHidden;
+                // console.log("messageID: " +  state[i].messageID);
+                
+                if (state[i].messageID === (parseInt(action.payload.id))) {
+                    state[i].showHidden = !state[i].showHidden;
                     break;
                 }
             }
             return (
-                {
-                    ...state,
-                    data: [...changeState]
-                }
+                [
+                    ...state
+                ]
             )
         }
 

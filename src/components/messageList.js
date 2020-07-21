@@ -1,21 +1,13 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import _ from 'underscore'
-import axios from 'axios'
 import { FILTER_ALL, FILTER_SHOWHIDDEN } from '../redux/actionTypes'
 import { toggleMessage, getMessages } from '../redux/actions'
 import Shrek from './shrek'
 
 const Message = ({ message, id, toggleMessage }) => (
     <li className={message.showHidden ? 'showHidden' : ''} onClick={() => {
-        toggleMessage(id);
-        console.log("Message is toggled");
-        axios.put('http://localhost:5000/messages/add', {
-            "messageID": Number(id),
-            "content": String(message.content),
-            "contentHidden": String(message.contentHidden),
-            "showHidden": Boolean(!message.showHidden)
-        })
+        toggleMessage(message);
         }}>
     {message.content}
     <Shrek hiddenText={message.contentHidden}></Shrek>
