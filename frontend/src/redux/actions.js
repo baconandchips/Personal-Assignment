@@ -10,7 +10,7 @@ export const getMessagesSuccess = (messages) => ({
 
 export const getMessages = () => {
     return (dispatch) => {
-        axios.get('http://localhost:5000/messages/')
+        axios.get(`/messages/`)
     .then(response => {
         console.log("Got data from backend");
         console.log("response: ", response.data);
@@ -33,7 +33,7 @@ export const addMessageSuccess = (content) => (
 
 export const addMessage = (message) => {
     return (dispatch) => {
-        axios.put('http://localhost:5000/messages/add', {
+        axios.put(`/messages/add`, {
             "messageID": Number(message.number),
             "content": String(message.content),
             "contentHidden": String(message.contentHidden),
@@ -61,7 +61,7 @@ export const toggleMessage = (message) => {
     return (dispatch) => {
         console.log("message inside toggle: ", message);
         console.log("message._id: ", message._id);
-        axios.post(`http://localhost:5000/messages/update/${message._id}`, {
+        axios.post(`/messages/update/${message._id}`, {
             "_id": Object(message._id),
             "messageID": Number(message.messageID),
             "content": String(message.content),
