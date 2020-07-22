@@ -18,14 +18,20 @@ app.use(express.json());
 app.use('/', indexRouter);
 app.use('/messages', messagesRouter);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'public')));
-    app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
-}
+//if (process.env.NODE_ENV === 'production') {
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
+//}
+
+// app.use(express.static('../frontend/build'));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
+})
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { 
-    useNewUrlParse: true, 
+mongoose.connect(uri, {
+    useNewUrlParse: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -36,13 +42,9 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('../frontend/build'));
+//if (process.env.NODE_ENV === 'production') {
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '..', 'frontend', 'build', 'index.html'));
-    })
-}
+//}
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
