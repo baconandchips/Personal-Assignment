@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node backend/index.js",
     "heroku-postbuild": "cd frontend && npm install && npm run build && cd .. && cd backend && npm install"
   },
   "engines": {
